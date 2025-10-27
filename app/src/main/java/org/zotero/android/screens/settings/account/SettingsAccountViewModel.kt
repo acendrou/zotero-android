@@ -398,17 +398,8 @@ internal class SettingsAccountViewModel @Inject constructor(
     }
 
     private fun isAllowedHttpHost(): Boolean {
-        try {
-            val hostComponentsWithPort = sessionStorage.url.split(":")
-            val hostComponentsWithSlashes = hostComponentsWithPort.firstOrNull()?.split("/")
-            val host = hostComponentsWithSlashes?.firstOrNull()
-            if (host != null && (host.endsWith("local") || host.endsWith("home.arpa"))) {
-                return true
-            }
-        } catch (e: Exception) {
-            //no-op
-        }
-        return false
+        // all http host are allowed: android config is changed from upstream to allow http for all domain/host
+        return true
     }
 
     private fun handleVerification(error: CustomResult.GeneralError) {
